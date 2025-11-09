@@ -68,9 +68,7 @@ fn read_files_in_folder(folder: &str) {
     }
 }
 
-pub fn get_record_parser(
-    csv_headers: &StringRecord,
-) -> Result<Box<dyn TransactionParser>, String> {
+pub fn get_record_parser(csv_headers: &StringRecord) -> Result<Box<dyn TransactionParser>, String> {
     let pc_financial_header: StringRecord =
         StringRecord::from(crate::pc_financial_record_parser::PC_FINANCIAL_HEADERS);
     if csv_headers.eq(&pc_financial_header) {
