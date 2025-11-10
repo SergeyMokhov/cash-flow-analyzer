@@ -8,6 +8,7 @@ pub struct Transaction {
     datetime: NaiveDateTime,
     description: String,
     parsing_error: Option<String>,
+    dataset_name: Option<String>,
 }
 
 impl Transaction {
@@ -22,6 +23,7 @@ impl Transaction {
             datetime,
             description,
             parsing_error,
+            dataset_name: None,
         }
     }
     pub fn amount(&self) -> Decimal {
@@ -53,6 +55,14 @@ impl Transaction {
 
     pub fn set_parsing_error(&mut self, parsing_error: String) {
         self.parsing_error = Some(parsing_error);
+    }
+
+    pub fn dataset_name(&self) -> &Option<String> {
+        &self.dataset_name
+    }
+
+    pub fn set_dataset_name(&mut self, dataset_name: Option<String>) {
+        self.dataset_name = dataset_name;
     }
 }
 

@@ -10,19 +10,19 @@ const TYPE: &str = "Type";
 const CARD_HOLDER_NAME: &str = "Card Holder Name";
 const DATE: &str = "Date";
 const TIME: &str = "Time";
-pub static PC_FINANCIAL_HEADERS: &[&str] =
+pub static PC_FINANCIAL_CREDIT_HEADERS: &[&str] =
     &[DESCRIPTION, TYPE, CARD_HOLDER_NAME, DATE, TIME, AMOUNT];
 
-pub struct PcFinancialRecordParser {
+pub struct PcFinancialCreditRecordParser {
     amount_position: u8,
     date_position: u8,
     time_position: u8,
     description_positions: Vec<u8>,
 }
 
-impl Default for PcFinancialRecordParser {
-    fn default() -> PcFinancialRecordParser {
-        PcFinancialRecordParser {
+impl Default for PcFinancialCreditRecordParser {
+    fn default() -> PcFinancialCreditRecordParser {
+        PcFinancialCreditRecordParser {
             amount_position: 5,
             date_position: 3,
             time_position: 4,
@@ -31,7 +31,7 @@ impl Default for PcFinancialRecordParser {
     }
 }
 
-impl PcFinancialRecordParser {
+impl PcFinancialCreditRecordParser {
     pub fn new(csv_header: &StringRecord) -> Self {
         let mut amount_position: u8 = 0;
         let mut date_position: u8 = 0;
@@ -47,7 +47,7 @@ impl PcFinancialRecordParser {
             }
         }
 
-        PcFinancialRecordParser {
+        PcFinancialCreditRecordParser {
             amount_position,
             date_position,
             time_position,
@@ -55,7 +55,7 @@ impl PcFinancialRecordParser {
         }
     }
 }
-impl TransactionParser for PcFinancialRecordParser {
+impl TransactionParser for PcFinancialCreditRecordParser {
     fn parse_transaction(&self, csv_record: &StringRecord) -> Result<Transaction, Transaction> {
         let mut amount: Decimal = Decimal::default();
         let mut date: NaiveDate = NaiveDate::default();
